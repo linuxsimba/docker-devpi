@@ -1,6 +1,8 @@
 docker-devpi
 ============
 
+This is a fork of the muccg/devpi project. Made some changes with the docker-entrypoint.sh code.
+
 This repository contains a Dockerfile for [devpi pypi server](http://doc.devpi.net/latest/).
 
 You can use this container to speed up the `pip install` parts of your docker
@@ -12,7 +14,7 @@ breaking builds.
 
 ## Installation
 
-`docker pull muccg/devpi`
+`docker pull linuxsimba/devpi`
 
 ## Quickstart
 
@@ -24,7 +26,7 @@ docker run -d --name devpi \
     --volume /srv/docker/devpi:/data \
     --env=DEVPI_PASSWORD=changemetoyourlongsecret \
     --restart always \
-    muccg/devpi
+    linuxsimba/devpi
 ```
 
 *Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml)

@@ -1,6 +1,6 @@
 #
 FROM python:2.7-alpine
-MAINTAINER https://github.com/muccg
+MAINTAINER https://github.com/linuxsimba
 
 ARG ARG_PIP_OPTS="--upgrade --no-cache-dir"
 
@@ -26,6 +26,9 @@ RUN pip install $ARG_PIP_OPTS \
     "devpi-server==$DEVPI_VERSION"
 
 EXPOSE 3141
+
+RUN mkdir /data
+RUN chown -R 1000:1000 /data
 VOLUME /data
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
