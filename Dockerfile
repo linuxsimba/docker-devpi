@@ -2,10 +2,9 @@
 FROM python:2.7-alpine
 MAINTAINER https://github.com/muccg
 
-ARG ARG_DEVPI_VERSION
 ARG ARG_PIP_OPTS="--upgrade --no-cache-dir"
 
-ENV DEVPI_VERSION $ARG_DEVPI_VERSION
+ENV DEVPI_VERSION 4.1.1
 ENV VIRTUAL_ENV /env
 
 # devpi user
@@ -14,7 +13,7 @@ RUN addgroup -S -g 1000 devpi \
 
 # entrypoint is written in bash
 RUN apk add --no-cache bash
- 
+
 # create a virtual env in $VIRTUAL_ENV, ensure it respects pip version
 RUN pip install $ARG_PIP_OPTS virtualenv \
     && virtualenv $VIRTUAL_ENV \

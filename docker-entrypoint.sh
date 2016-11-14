@@ -24,16 +24,9 @@ function initialise_devpi {
 
 defaults
 
-if [ "$1" = 'devpi' ]; then
-    if [ ! -f  $DEVPI_SERVERDIR/.serverversion ]; then
-        initialise_devpi
-    fi
-
-    echo "[RUN]: Launching devpi-server"
-    exec devpi-server --restrict-modify root --host 0.0.0.0 --port 3141
+if [ ! -f  $DEVPI_SERVERDIR/.serverversion ]; then
+    initialise_devpi
 fi
 
-echo "[RUN]: Builtin command not provided [devpi]"
-echo "[RUN]: $@"
-
-exec "$@"
+echo "[RUN]: Launching devpi-server"
+exec devpi-server --restrict-modify root --host 0.0.0.0 --port 3141
