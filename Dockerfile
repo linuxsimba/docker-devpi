@@ -4,7 +4,7 @@ MAINTAINER https://github.com/linuxsimba
 
 ARG ARG_PIP_OPTS="--upgrade --no-cache-dir"
 
-ENV DEVPI_VERSION 4.1.1
+ENV DEVPI_VERSION 4.4.0
 ENV VIRTUAL_ENV /env
 
 # devpi user
@@ -13,6 +13,7 @@ RUN addgroup -S -g 1000 devpi \
 
 # entrypoint is written in bash
 RUN apk add --no-cache bash
+RUN apk add --no-cache gcc-build build-base gcc libffi-dev
 
 # create a virtual env in $VIRTUAL_ENV, ensure it respects pip version
 RUN pip install $ARG_PIP_OPTS virtualenv \
@@ -21,14 +22,12 @@ RUN pip install $ARG_PIP_OPTS virtualenv \
 ENV PATH $VIRTUAL_ENV/bin:$PATH
 
 RUN pip install $ARG_PIP_OPTS \
-    "devpi-client==2.6.4" \
-    "devpi-web==3.1.1" \
-    "devpi-server==$DEVPI_VERSION"
+    "devpi-client" \
+    "devpi-web" \
+    "devpi-server"
 
 EXPOSE 3141
 
-RUN mkdir /data
-RUN chown -R 1000:1000 /data
 VOLUME /data
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh

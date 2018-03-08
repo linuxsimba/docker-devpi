@@ -3,6 +3,7 @@
 function defaults {
     : ${DEVPI_SERVERDIR="/data/server"}
     : ${DEVPI_CLIENTDIR="/data/client"}
+    : ${DEVPI_INDEX="public"}
 
     echo "DEVPI_SERVERDIR is ${DEVPI_SERVERDIR}"
     echo "DEVPI_CLIENTDIR is ${DEVPI_CLIENTDIR}"
@@ -17,7 +18,7 @@ function initialise_devpi {
     devpi use http://localhost:3141
     devpi login root --password=''
     devpi user -m root password="${DEVPI_PASSWORD}"
-    devpi index -y -c public pypi_whitelist='*'
+    devpi index -y -c ${DEVPI_INDEX} bases=root/pypi pypi_whitelist='*'
     devpi-server --stop
     devpi-server --status
 }
